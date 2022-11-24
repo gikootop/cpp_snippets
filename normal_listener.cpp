@@ -9,12 +9,23 @@ public:
 class Notifier
 {
 public:
+
+	/**
+	 * @brief 添加监听者
+	 * @param observer 监听者
+	*/
 	virtual void addListener(Listener* listener);
+	
+	/**
+	 * @brief 移除监听者
+	 * @param observer 监听者
+	*/
 	virtual void removeListener(Listener* listener);
 	
 private:
 	virtual void notifyXXXXXXChanged();
 	
+	/** 监听者 */
 	std::vector<Listener*> m_listeners;
 };
 
@@ -37,9 +48,9 @@ void Notifier::notifyXXXXXXChanged()
 	auto tmpVector = m_listeners;
 	for (auto item : tmpVector)
 	{
-		if (*item)
+		if (item)
 		{
-			(*item)->onNotifierXXXXXXChanged();
+			item->onNotifierXXXXXXChanged();
 		}
 	}
 }

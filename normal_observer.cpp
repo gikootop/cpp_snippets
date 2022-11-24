@@ -9,37 +9,48 @@ public:
 class Notifier
 {
 public:
-	virtual void addObserver(Observer* Observer);
-	virtual void removeObserver(Observer* Observer);
+
+	/**
+	 * @brief 添加观察者
+	 * @param observer 观察者
+	*/
+	virtual void addObserver(Observer* observer);
+	
+	/**
+	 * @brief 移除观察者
+	 * @param observer 观察者
+	*/
+	virtual void removeObserver(Observer* observer);
 	
 private:
 	virtual void notifyXXXXXXChanged();
 	
-	std::vector<Observer*> m_Observers;
+	/** 观察者 */
+	std::vector<Observer*> m_observers;
 };
 
-void Notifier::addObserver(Observer* Observer)
+void Notifier::addObserver(Observer* observer)
 {
-	m_Observers.push_back(Observer);
+	m_observers.push_back(Observer);
 }
 
-void Notifier::removeObserver(Observer* Observer)
+void Notifier::removeObserver(Observer* observer)
 {
-	auto iter = std::find(m_Observers.begin(), m_Observers.end(), Observer);
-	if (iter != m_Observers.end())
+	auto iter = std::find(m_observers.begin(), m_observers.end(), observer);
+	if (iter != m_observers.end())
 	{
-		m_Observers.erase(iter);
+		m_observers.erase(iter);
 	}
 }
 
 void Notifier::notifyXXXXXXChanged()
 {
-	auto tmpVector = m_Observers;
+	auto tmpVector = m_observers;
 	for (auto item : tmpVector)
 	{
-		if (*item)
+		if (item)
 		{
-			(*item)->onNotifierXXXXXXChanged();
+			item->onNotifierXXXXXXChanged();
 		}
 	}
 }
