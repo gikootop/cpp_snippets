@@ -1,8 +1,11 @@
+#include <vector>
+#include <algorithm>
+
 class Observer
 {
 public:
 	virtual ~Observer() {}
-	
+
 	virtual void onNotifierXXXXXXChanged() {}
 };
 
@@ -15,23 +18,23 @@ public:
 	 * @param observer 观察者
 	*/
 	virtual void addObserver(Observer* observer);
-	
+
 	/**
 	 * @brief 移除观察者
 	 * @param observer 观察者
 	*/
 	virtual void removeObserver(Observer* observer);
-	
+
 private:
 	virtual void notifyXXXXXXChanged();
-	
+
 	/** 观察者 */
 	std::vector<Observer*> m_observers;
 };
 
 void Notifier::addObserver(Observer* observer)
 {
-	m_observers.push_back(Observer);
+	m_observers.push_back(observer);
 }
 
 void Notifier::removeObserver(Observer* observer)
